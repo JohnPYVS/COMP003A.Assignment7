@@ -58,13 +58,13 @@ namespace COMP003A.Assignment7
                     // I encounterd a bug where my average was wrong when the expenses had decimals
                     // This was because I used an int total which cut off the decimals 
                     // and it wasn't averaging the numbers anymore
-                    int total = 0;  // This is the bug that removes the decimals, the answer
-                                    // I got was 11.6 when it was supposed to be 12.118
+                    double total = 0.0;  // I figured using the double total will keep the decimals
+                   
                     foreach (double value in expenses)
                     {
-                        total = total + (int)value;
+                        total = total + value;
                     }
-                    double average = (double)total / expenses.Count;
+                    double average = total / expenses.Count;
                     Console.WriteLine("Average: " + average);
                 }
             }
