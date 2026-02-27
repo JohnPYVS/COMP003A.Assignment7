@@ -43,10 +43,16 @@ namespace COMP003A.Assignment7
                     {
                         Console.WriteLine(expenses[i]);
                     }
-                    Console.Write("Enter a new expense to add: ");
+                    Console.Write("Enter a new expense to add or press enter to skip: ");
+                    string newExpenseInput = Console.ReadLine();
+                    
+                    if (newExpenseInput != "")
+                    {
+                        
+                    }
                     try
                     {
-                        double newExpense = Convert.ToDouble(Console.ReadLine());
+                        double newExpense = Convert.ToDouble(newExpenseInput);
                         expenses.Add(newExpense);
                         Console.WriteLine("Added: " + newExpense);
                     }
