@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 
 namespace COMP003A.Assignment7
 {
@@ -23,14 +24,14 @@ namespace COMP003A.Assignment7
                 Console.WriteLine("3. Show Average");
                 Console.WriteLine("4 Update an Expense");
                 Console.WriteLine("5. Exit");
-                Console.WriteLine("Enter choice: ");
+                Console.WriteLine("Enter choice:");
 
                 string choiceInput = Console.ReadLine();
 
                 int choice;
                 bool menu = int.TryParse(choiceInput, out choice);
 
-                if(!menu || choice < 1 || choice > 5)
+                if (!menu || choice < 1 || choice > 5)
                 {
                     Console.WriteLine("Invalid menu choice. Enter a number 1-5.");
                 }
@@ -42,11 +43,22 @@ namespace COMP003A.Assignment7
                     {
                         Console.WriteLine(expenses[i]);
                     }
+                    Console.Write("Enter a new expense to add: ");
+                    try
+                    {
+                        double newExpense = Convert.ToDouble(Console.ReadLine());
+                        expenses.Add(newExpense);
+                        Console.WriteLine("Added: " + newExpense);
+                    }
+                    catch (FormatException)
+                    {
+                        Console.WriteLine("Invalid number entered. Nothing added.");
+                    }
                 }
                 else if (choice == 2)
                 {
-                    double total = 0.0;
-                    foreach (double value in expenses) 
+                    double total = 0;
+                    foreach (double value in expenses)
                     {
                         total = total + value;
                     }
@@ -58,14 +70,19 @@ namespace COMP003A.Assignment7
                     // I encounterd a bug where my average was wrong when the expenses had decimals
                     // This was because I used an int total which cut off the decimals 
                     // and it wasn't averaging the numbers anymore
-                    double total = 0.0;  // I figured using the double total will keep the decimals
-                   
+                    double total = 0;  // I figured using the double total will keep the decimals
+
                     foreach (double value in expenses)
                     {
                         total = total + value;
                     }
                     double average = total / expenses.Count;
                     Console.WriteLine("Average: " + average);
+                }
+                else if (choice == 4)
+                {
+                    running = false;
+                    Console.WriteLine("Program ended.");
                 }
             }
         }
